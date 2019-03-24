@@ -2,7 +2,7 @@
     "name": "hackathon",
     "version": "0.1.0",
     "private": true,
-    "homepage": "http://rpmonteiro.github.io/valser-si",
+    "homepage": "http://rpmonteiro.github.io/hackathon",
     "dependencies": {
         "@material-ui/core": "^3.9.2",
         "@material-ui/icons": "^3.0.2",
