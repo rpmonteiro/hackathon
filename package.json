@@ -2,6 +2,7 @@
     "name": "hackathon",
     "version": "0.1.0",
     "private": true,
+    "homepage": "http://rpmonteiro.github.io/valser-si",
     "dependencies": {
         "@material-ui/core": "^3.9.2",
         "@material-ui/icons": "^3.0.2",
@@ -16,6 +17,7 @@
         "@types/react-router-dom": "^4.3.1",
         "apexcharts": "^3.6.3",
         "classnames": "^2.2.6",
+        "gh-pages": "^2.0.1",
         "moment": "^2.24.0",
         "node-sass": "^4.11.0",
         "react": "^16.8.5",
@@ -26,6 +28,8 @@
         "typescript": "^3.3.4000"
     },
     "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
