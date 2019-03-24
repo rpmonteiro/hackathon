@@ -27,16 +27,18 @@ interface Props {}
 export interface FundData {
     category?: 'nature' | 'energy' | 'water' | 'education' | 'housing'
     name: string
+    location: string
     insights: string[]
     imgSrc: string
     lat: number
     lng: number
 }
 
-const dummyFunds: FundData[] = [
+export const dummyFunds: FundData[] = [
     {
         category: 'nature',
         name: 'Responsability Fair Agriculture Fund',
+        location: 'Ujku Village, Namibia',
         insights: [
             '2.9 million smallholders impacted',
             'Post-harvest food waste reduced to 0.5% from an average of 10% in India'
@@ -49,6 +51,7 @@ const dummyFunds: FundData[] = [
     {
         category: 'housing',
         name: 'Responsability Micro and SME Finance Fund',
+        location: 'Ujku Village, Namibia',
         insights: [
             'Provides financial inclusion for 2 million female clients',
             '10,046 stable, formal jobs created'
@@ -60,6 +63,7 @@ const dummyFunds: FundData[] = [
     {
         category: 'energy',
         name: 'Global Climate Partnership Fund',
+        location: 'Ujku Village, Namibia',
         insights: [
             '174 MW of clean energy capacity installed',
             'Access to electricity for over 12,000 households',
@@ -73,6 +77,7 @@ const dummyFunds: FundData[] = [
     {
         category: 'education',
         name: 'Empowerment through Education Fund',
+        location: 'Ujku Village, Namibia',
         insights: ["Provides elementary school to 150'000 children in underserved communities"],
         imgSrc:
             'https://res.cloudinary.com/devex/image/fetch/c_scale,f_auto,q_auto,w_720/https://lh3.googleusercontent.com/KH1c82Pc0hbF7wQnBSspYS9YBGSVrcWSP2mqmDQvOzjvwOIONea-QNrIiknBfujujuLA_4qnZsx4x1n3Rc1q5gFC0suuFWRvrGdzNIWX-ERND175Wsk8_iWMxOoxhY_RGqAeT1Il',
@@ -82,6 +87,7 @@ const dummyFunds: FundData[] = [
     {
         category: 'water',
         name: 'Sustainable Water Fund',
+        location: 'Ujku Village, Namibia',
         insights: [
             'USD 78 million invested in water infrastructure',
             '2.5 million households impacted'
@@ -92,7 +98,7 @@ const dummyFunds: FundData[] = [
     }
 ]
 
-const donutChartData = {
+export const donutChartData = {
     options: {
         responsive: [
             {
@@ -131,7 +137,7 @@ for (var i = 0; i < 18; i++) {
     dataSet[1].push(innerArr)
 }
 
-const lineChartData = {
+export const lineChartData = {
     options: {
         chart: {
             stacked: false,
@@ -195,7 +201,7 @@ const lineChartData = {
             max: new Date('01/20/2014').getTime()
         },
         title: {
-            text: 'Irregular Data in Time Series',
+            text: 'Index performance vs fund portfolio',
             align: 'left',
             offsetX: 14
         },
@@ -228,8 +234,8 @@ const styles = (theme: Theme) =>
         },
         mapContainer: {
             height: 600,
-            width: '120vw',
-            margin: '0 -200px'
+            marginLeft: -100,
+            width: '100vw'
         },
         avatar: {
             backgroundColor: blue[500]

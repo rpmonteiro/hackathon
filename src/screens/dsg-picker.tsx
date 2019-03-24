@@ -73,7 +73,7 @@ class DSGPicker extends Component<{}, State> {
         selectedIdx: [] as number[],
         horizon: 5,
         amount: 100000,
-        risk: 5
+        risk: 3
     }
 
     toggleIdx = (idx: number) => {

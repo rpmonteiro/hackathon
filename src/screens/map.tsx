@@ -107,6 +107,7 @@ interface State {
 const dummyMarkerData = {
     lng: 0,
     lat: 0,
+    location: '',
     insights: [],
     category: undefined,
     name: '',
@@ -123,7 +124,7 @@ export class Map extends Component<Props, State> {
         viewport: {
             latitude: 5.273,
             longitude: 5.273,
-            zoom: 1.98,
+            zoom: 1.72,
             bearing: 0,
             pitch: 0
         }
@@ -194,8 +195,8 @@ export class Map extends Component<Props, State> {
                 >
                     <div className={classes.popupContent}>
                         <h4>{popupInfo.name}</h4>
+                        <p>{popupInfo.location}</p>
                         <img src={popupInfo.imgSrc} />
-                        {/* <p>{popupInfo.description}</p> */}
                         <Button>Learn more</Button>
                     </div>
                 </Popup>
@@ -213,7 +214,8 @@ export class Map extends Component<Props, State> {
                 width="100%"
                 height="100%"
                 onViewportChange={this.onViewportChange}
-                mapStyle="mapbox://styles/rpmonteiro/cjtlehdg40zee1fnk2fqkufiu"
+                // mapStyle="mapbox://styles/rpmonteiro/cjtmrm0qt23161fphb8e53k6u" // light
+                mapStyle="mapbox://styles/rpmonteiro/cjtlehdg40zee1fnk2fqkufiu" // dark
                 mapboxApiAccessToken="pk.eyJ1IjoicnBtb250ZWlybyIsImEiOiJjanRsYXh0NjIxZXhuNDVvNjRwNjgwa2NiIn0.Vtal2McNDWYuODg7C4el6g"
             >
                 {data.map(this.renderMarker)}

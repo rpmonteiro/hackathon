@@ -5,6 +5,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import DSGPicker from './screens/dsg-picker'
 import ReviewProposal from './screens/review-proposal'
 import { fade } from '@material-ui/core/styles/colorManipulator'
+import cn from 'classnames'
 
 import './app.scss'
 import {
@@ -24,6 +25,8 @@ import {
     MuiThemeProvider
 } from '@material-ui/core'
 import { customTheme } from './custom-theme'
+import { LoadingSpinner } from './loading-spinner'
+import { Proposal } from './screens/proposal'
 
 const steps = ['Configure the portflio', 'Review proposal', 'Send proposal']
 
@@ -74,8 +77,10 @@ const styles = (theme: Theme) =>
             right: 0
         },
         goRight: {
-            marginTop: -140,
             textAlign: 'right'
+        },
+        goRightUp: {
+            marginTop: -140
         },
         root: {
             width: '90%'
@@ -113,6 +118,7 @@ const styles = (theme: Theme) =>
     })
 
 interface State {
+    showLoadingSpinner: boolean
     activeStep: number
     completed: {
         [key: number]: boolean
@@ -121,71 +127,92 @@ interface State {
 
 class App extends Component<{}, State> {
     state = {
+        showLoadingSpinner: false,
         activeStep: 0,
         completed: {}
     }
 
     handleNext = () => {
-        this.setState({
-            activeStep: this.state.activeStep + 1
-        })
+        console.log('handle next')
+        this.setState(
+            {
+                showLoadingSpinner: this.state.activeStep === 1,
+                activeStep: this.state.activeStep + 1
+            },
+            () => {
+                if (this.state.showLoadingSpinner) {
+                    window.setTimeout(() => {
+                        this.setState({ showLoadingSpinner: false })
+                    }, 2000)
+                }
+            }
+        )
     }
 
     render() {
         // @ts-ignore
         const { classes } = this.props
-        const { activeStep } = this.state
+        const { activeStep, showLoadingSpinner } = this.state
+        console.log({ activeStep, showLoadingSpinner })
         return (
             <MuiThemeProvider theme={customTheme}>
                 <div className={classes.layout}>
-                    <div>
-                        <AppBar position="static">
-                            <Toolbar>
-                                <Typography
-                                    className={classes.title}
-                                    variant="title"
-                                    color="inherit"
-                                >
-                                    Valser Private Investment
-                                </Typography>
-                                <div className={classes.extraContainer}>
-                                    <div className={classes.search}>
-                                        <div className={classes.searchIcon}>
-                                            <SearchIcon />
+                    {activeStep < 2 && (
+                        <div>
+                            <AppBar position="static">
+                                <Toolbar>
+                                    <Typography
+                                        className={classes.title}
+                                        variant="title"
+                                        color="inherit"
+                                    >
+                                        Valser Private Investment
+                                    </Typography>
+                                    <div className={classes.extraContainer}>
+                                        <div className={classes.search}>
+                                            <div className={classes.searchIcon}>
+                                                <SearchIcon />
+                                            </div>
+                                            <InputBase
+                                                placeholder="Search…"
+                                                classes={{
+                                                    root: classes.inputRoot,
+                                                    input: classes.inputInput
+                                                }}
+                                            />
                                         </div>
-                                        <InputBase
-                                            placeholder="Search…"
-                                            classes={{
-                                                root: classes.inputRoot,
-                                                input: classes.inputInput
-                                            }}
-                                        />
+                                        <div className={classes.grow} />
+                                        <div className={classes.sectionDesktop}>
+                                            <IconButton color="inherit">
+                                                <Badge badgeContent={4} color="secondary">
+                                                    <MailIcon />
+                                                </Badge>
+                                            </IconButton>
+                                            <IconButton color="inherit">
+                                                <Badge badgeContent={17} color="secondary">
+                                                    <NotificationsIcon />
+                                                </Badge>
+                                            </IconButton>
+                                        </div>
                                     </div>
-                                    <div className={classes.grow} />
-                                    <div className={classes.sectionDesktop}>
-                                        <IconButton color="inherit">
-                                            <Badge badgeContent={4} color="secondary">
-                                                <MailIcon />
-                                            </Badge>
-                                        </IconButton>
-                                        <IconButton color="inherit">
-                                            <Badge badgeContent={17} color="secondary">
-                                                <NotificationsIcon />
-                                            </Badge>
-                                        </IconButton>
-                                    </div>
-                                </div>
-                            </Toolbar>
-                        </AppBar>
-                    </div>
+                                </Toolbar>
+                            </AppBar>
+                        </div>
+                    )}
 
+                    {showLoadingSpinner && <LoadingSpinner />}
                     {activeStep === 0 && <DSGPicker />}
                     {activeStep === 1 && <ReviewProposal />}
+                    {!showLoadingSpinner && activeStep === 2 && <Proposal />}
 
                     {activeStep !== 2 && (
                         <footer className={classes.footer}>
                             <div />
-                            <div className={classes.goRight}>
+                            <div
+                                className={cn(classes.goRight, {
+                                    [classes.goRightUp]: activeStep !== 0
+                                })}
+                            >
                                 {activeStep < 1 ? (
                                     <Button
                                         variant="contained"
@@ -199,7 +226,7 @@ class App extends Component<{}, State> {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => this.setState({ activeStep: 2 })}
+                                        onClick={this.handleNext}
                                         className={classes.button}
                                     >
                                         Send proposal
