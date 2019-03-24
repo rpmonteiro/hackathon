@@ -1,0 +1,14 @@
+$nice-blue: #157ef8;
+$max-width: 1280px;
+$nice-green: #7cfc00;
+$nice-orange: #ffa500;
+
+@mixin fluid-container() {
+    max-width: $max-width;
+    padding: 0 2rem;
+    margin: 0 auto;
+
+    @media screen and (max-width: 700px) {
+        padding: 0 10px;
+    }
+}

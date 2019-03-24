@@ -1,0 +1,124 @@
+@import './variables.scss';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f6f7f7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.button {
+    border: none;
+    padding: 10px 15px;
+    background: $nice-blue;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 80ms ease-out;
+    outline: none;
+
+    &:hover {
+        background: lighten($nice-blue, 12);
+    }
+
+    &__not-selected {
+        background: white;
+        color: black;
+
+        &:hover {
+            background: white;
+        }
+    }
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo-text {
+    color: white;
+    text-shadow: #ffffff 0px 0 2px;
+    display: inline-block;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 2rem;
+
+    @media screen and (max-width: 700px) {
+        font-size: 1.5rem;
+    }
+}
+
+.app-header {
+    padding: 0 3rem;
+    z-index: 1;
+
+    &__content {
+        max-width: 1280px;
+    }
+
+    @media screen and (max-width: 700px) {
+        padding: 0 10px;
+    }
+
+    &__view {
+        width: 150px;
+        position: fixed;
+
+        top: 0;
+        text-align: center;
+        left: calc(50% - 75px);
+
+        .button {
+            border-radius: 0;
+
+            &__not-selected {
+                background: white !important;
+            }
+
+            &:hover {
+                background: $nice-blue;
+            }
+
+            &:first-child {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 5px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 5px;
+            }
+        }
+    }
+}
+
+.app-body {
+    padding: 0 3rem;
+    max-width: 1280px;
+}
+
+.app-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
